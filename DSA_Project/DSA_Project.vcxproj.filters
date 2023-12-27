@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{15d80b96-5d5d-47aa-b93c-3a6ecb848cb4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SortingAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SortingAlgorithm.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataGenerator.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\SortingAlgorithm\data\data.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\GivenInput.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\input.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\input_1.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\input_2.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\input_3.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\input_4.txt">
+      <Filter>Data</Filter>
+    </Text>
+    <Text Include="..\..\SortingAlgorithm\data\output.txt">
+      <Filter>Data</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\SortingAlgorithm\data\a">
+      <Filter>Data</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -3,41 +3,43 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <string.h>
 #include "DataGenerator.h"
 #include "SortingAlgorithm.h"
+
 
 using namespace std;
 
 void chooseAlgorithm(const string& algorithm, int* data, int dataSize, long long& comparisions) {
     if (algorithm == "selection-sort") {
-        SelectionSort(&data, dataSize, comparisions);
+        SelectionSort(data, dataSize, comparisions);
     }
     else if (algorithm == "insertion-sort") {
-        InsertionSort(&data, dataSize, comparisions);
+        InsertionSort(data, dataSize, comparisions);
     }
     else if (algorithm == "bubble-sort") {
-        BubbleSort(&data, dataSize, comparisions);
+        BubbleSort(data, dataSize, comparisions);
     }
     else if (algorithm == "heap-sort") {
-        HeapSort(&data, dataSize, comparisions);
+        HeapSort(data, dataSize, comparisions);
     }
     else if (algorithm == "merge-sort") {
-        MergeSort(&data, 0, dataSize - 1, comparisions);
+        MergeSort(data, 0, dataSize - 1, comparisions);
     }
     else if (algorithm == "quick-sort") {
-        QuickSort(&data, 0, dataSize - 1, comparisions);
+        QuickSort(data, 0, dataSize - 1, comparisions);
     }
     else if (algorithm == "radix-sort") {
-        RadixSort(&data, dataSize, comparisions);
+        RadixSort(data, dataSize, comparisions);
     }
     else if (algorithm == "counting-sort") {
-        CountingSort(&data, dataSize, comparisions);
+        CountingSort(data, dataSize, comparisions);
     }
     else if (algorithm == "shaker-sort") {
-        ShakerSort(&data, dataSize, comparisions);
+        ShakerSort(data, dataSize, comparisions);
     }
     else if (algorithm == "shell-sort") {
-        ShellSort(&data, dataSize, comparisions);
+        ShellSort(data, dataSize, comparisions);
     }
     else if (algorithm == "flash-sort") {
         FlashSort(data, dataSize, comparisions);
@@ -53,7 +55,7 @@ void chooseAlgorithm(const string& algorithm, int* data, int dataSize, long long
 //     0             1     2            3                4
 void Command1(int argc, char* argv[])
 {
-    string algorithm = argv[2], fileName = argv[3];
+    string algorithm = string(argv[2]), fileName = string(argv[3]);
     fstream fin;
     fin.open(fileName);
     if (!fin.is_open())
@@ -119,15 +121,17 @@ void Command1(int argc, char* argv[])
     fin.close();
     fout.close();
     delete[] data;
+
+    return;
 }
 
 // [Execution file] -a [Algorithm] [Input size] [Input order] [Output parameter(s)]
 void Command2(int argc, char* argv[])
 {
-    string algorithm = argv[2];
+    string algorithm = string(argv[2]);
     int dataSize = atoi(argv[3]);
 
-    string inputOrder = argv[4];
+    string inputOrder = string(argv[4]);
     int* data = new int[dataSize];
 
     if (inputOrder == "-rand") {
@@ -204,12 +208,14 @@ void Command2(int argc, char* argv[])
     fout.close();
 
     delete[] data;
+
+    return;
 }
 
 void Command3(int argc, char* argv[])
 {
-    string algorithm = argv[2];
-    string parameter = argv[4];
+    string algorithm = string(argv[2]);
+    string parameter = string(argv[4]);
     int dataSize = atoi(argv[3]);
 
     cout << "ALGORITHM MODE\n";
@@ -272,6 +278,8 @@ void Command3(int argc, char* argv[])
     for (int i = 0; i < 4; i++)
         delete data[i];
     delete[]data;
+
+    return;
 }
 
 void runSortingAlgorithm(int argc, char* argv[])
@@ -291,9 +299,9 @@ void runSortingAlgorithm(int argc, char* argv[])
 void Command4(int agrc, char* agrv[])
 {
     // Add your implementation for Command4 if needed
-    string algorithm1 = agrv[2];
-    string algorithm2 = agrv[3];
-    string fileName = agrv[4];
+    string algorithm1 = string(agrv[2]);
+    string algorithm2 = string(agrv[3]);
+    string fileName = string(agrv[4]);
 
     fstream reader(fileName);
 
@@ -350,16 +358,18 @@ void Command4(int agrc, char* agrv[])
     //system("pause");
     delete[] data;
     delete[] dataTemp;
+
+    return;
 }
 
 //       0          1     2              3            4            5
 //[Execution file] -c [Algorithm 1] [Algorithm 2] [Input size] [Input order]
 void Command5(int agrc, char* agrv[])
 {
-    string algorithm1 = agrv[2];
-    string algorithm2 = agrv[3];
+    string algorithm1 = string(agrv[2]);
+    string algorithm2 = string(agrv[3]);
     int dataSize = stoi(agrv[4]);
-    string inputOrder = agrv[5];
+    string inputOrder = string(agrv[5]);
 
     int* a = new int[dataSize];
 
@@ -433,6 +443,8 @@ void Command5(int agrc, char* agrv[])
     delete[]a;
     delete[]data;
 
+    return;
+
 }
 
 void compareSortingAlgorithms(int argc, char* argv[])
@@ -448,7 +460,7 @@ void compareSortingAlgorithms(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-    string mode = argv[1];
+    string mode = string(argv[1]);
     if (mode == "-a")
     {
         runSortingAlgorithm(argc, argv);

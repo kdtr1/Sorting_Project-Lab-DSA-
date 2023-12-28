@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <cstring>
 using namespace std;
 
 void PrintArr(int* a, int n) {
@@ -6,7 +7,7 @@ void PrintArr(int* a, int n) {
         cout << a[i] << " ";
 }
 
-void SelectionSort(int* arr[], int n, long long& comparisons) {
+void SelectionSort(int arr[], int n, long long& comparisons) {
     for (int i = 0; ++comparisons && i < n - 1; i++) {
         int min_indx = i;
         for (int j = i + 1; ++comparisons && j < n; j++) {
@@ -17,20 +18,20 @@ void SelectionSort(int* arr[], int n, long long& comparisons) {
     }
 }
 
-void InsertionSort(int* a[], int n, long long& comparisons) {
+void InsertionSort(int a[], int n, long long& comparisons) {
     int key, j;
     for (int i = 1; ++comparisons && i < n; i++) {
-        key = *a[i];
+        key = a[i];
         j = i - 1;
-        while (++comparisons && j >= 0 && ++comparisons && *a[j] > key) {
+        while (++comparisons && j >= 0 && ++comparisons && a[j] > key) {
             a[j + 1] = a[j];
             j--;
         }
-        *a[j + 1] = key;
+        a[j + 1] = key;
     }
 }
 
-void BubbleSort(int* a[], int n, long long& comparisons) {
+void BubbleSort(int a[], int n, long long& comparisons) {
     for (int i = 0; ++comparisons && i < n - 1; ++i) {
         for (int j = i + 1; ++comparisons && j < n; ++j) {
             if (++comparisons && a[i] > a[j]) {
@@ -40,7 +41,7 @@ void BubbleSort(int* a[], int n, long long& comparisons) {
     }
 }
 
-void Heapify(int* arr[], int n, int i, long long& comparisons) {
+void Heapify(int arr[], int n, int i, long long& comparisons) {
     int largest = i;
     int left = i * 2 + 1;
     int right = i * 2 + 2;
@@ -68,7 +69,7 @@ void Heapify(int* arr[], int n, int i, long long& comparisons) {
     }
 }
 
-void HeapSort(int* arr[], int n, long long& comparisons) {
+void HeapSort(int arr[], int n, long long& comparisons) {
     for (int i = n / 2 - 1; i >= 0 && ++comparisons; i--)
         Heapify(arr, n, i, comparisons);
 
@@ -78,7 +79,7 @@ void HeapSort(int* arr[], int n, long long& comparisons) {
     }
 }
 
-void Merge(int* arr[], int l, int m, int r, long long& comparisons) {
+void Merge(int arr[], int l, int m, int r, long long& comparisons) {
     int length1 = m - l + 1;
     int length2 = r - m;
 
@@ -86,34 +87,34 @@ void Merge(int* arr[], int l, int m, int r, long long& comparisons) {
     int* rightArr = new int[length2];
 
     for (int i = 0; ++comparisons && i < length1; i++)
-        leftArr[i] = *arr[l + i];
+        leftArr[i] = arr[l + i];
 
     for (int i = 0; ++comparisons && i < length2; i++)
-        rightArr[i] = *arr[m + i + 1];
+        rightArr[i] = arr[m + i + 1];
 
     int indexOfArr1 = 0, indexOfArr2 = 0, i = l;
 
     while (++comparisons && indexOfArr1 < length1 && ++comparisons && indexOfArr2 < length2) {
         if (++comparisons && leftArr[indexOfArr1] < rightArr[indexOfArr2]) {
-            *arr[i] = leftArr[indexOfArr1++];
+            arr[i] = leftArr[indexOfArr1++];
         }
         else if (++comparisons && leftArr[indexOfArr1] >= rightArr[indexOfArr2]) {
-            *arr[i] = rightArr[indexOfArr2++];
+            arr[i] = rightArr[indexOfArr2++];
         }
         i++;
     }
 
     while (++comparisons && indexOfArr1 < length1) {
-        *arr[i++] = leftArr[indexOfArr1++];
+        arr[i++] = leftArr[indexOfArr1++];
     }
     while (++comparisons && indexOfArr2 < length2) {
-        *arr[i++] = rightArr[indexOfArr2++];
+        arr[i++] = rightArr[indexOfArr2++];
     }
     delete[] leftArr;
     delete[] rightArr;
 }
 
-void MergeSort(int* arr[], int l, int r, long long& comparisons) {
+void MergeSort(int arr[], int l, int r, long long& comparisons) {
     if (l >= r)
         return;
     int m = (r + l) / 2;
@@ -122,7 +123,7 @@ void MergeSort(int* arr[], int l, int r, long long& comparisons) {
     Merge(arr, l, m, r, comparisons);
 }
 
-int MedianOfThree(int* arr[], int l, int r, long long& comparisons) {
+int MedianOfThree(int arr[], int l, int r, long long& comparisons) {
     int mid = l + (r - l) / 2;
     if (++comparisons && arr[mid] < arr[l]) {
         swap(arr[mid], arr[l]);
@@ -136,14 +137,14 @@ int MedianOfThree(int* arr[], int l, int r, long long& comparisons) {
     return mid;
 }
 
-int Partition(int* arr[], int l, int r, long long& comparisons) {
+int Partition(int arr[], int l, int r, long long& comparisons) {
     int pivotIndex = MedianOfThree(arr, l, r, comparisons);
-    int pivot = *arr[pivotIndex];
+    int pivot = arr[pivotIndex];
     swap(arr[pivotIndex], arr[r]);
 
     int i = l - 1;
     for (int j = l; ++comparisons && j < r; j++) {
-        if (++comparisons && *arr[j] < pivot)
+        if (++comparisons && arr[j] < pivot)
             swap(arr[++i], arr[j]);
     }
     i++;
@@ -151,7 +152,7 @@ int Partition(int* arr[], int l, int r, long long& comparisons) {
     return i;
 }
 
-void QuickSort(int* arr[], int l, int r, long long& comparisons) {
+void QuickSort(int arr[], int l, int r, long long& comparisons) {
     if (++comparisons && l < r) {
         comparisons++;
         int pivot = Partition(arr, l, r, comparisons);
@@ -160,21 +161,21 @@ void QuickSort(int* arr[], int l, int r, long long& comparisons) {
     }
 }
 
-int GetMax(int* a[], int n, long long& comparisons) {
-    int mx = *a[0];
+int GetMax(int a[], int n, long long& comparisons) {
+    int mx = a[0];
     for (int i = 0; i < n && ++comparisons; i++) {
         comparisons++; // Tăng số lần so sánh
-        mx = std::max(mx, *a[i]);
+        mx = std::max(mx, a[i]);
     }
     return mx;
 }
 
-void CountSort(int* a[], int n, int exp, long long& comparisons) {
+void CountSort(int a[], int n, int exp, long long& comparisons) {
     int i, count[10] = { 0 };
     int* OutPutArray = new int[500000];
 
     for (i = 0; ++comparisons && i < n; i++) {
-        count[(*a[i] / exp) % 10]++;
+        count[(a[i] / exp) % 10]++;
     }
 
     for (i = 1; ++comparisons && i < 10; i++) {
@@ -182,23 +183,23 @@ void CountSort(int* a[], int n, int exp, long long& comparisons) {
     }
 
     for (i = n - 1; ++comparisons && i >= 0; i--) {
-        OutPutArray[count[(*a[i] / exp) % 10] - 1] = *a[i];
-        count[(*a[i] / exp) % 10]--;
+        OutPutArray[count[(a[i] / exp) % 10] - 1] = a[i];
+        count[(a[i] / exp) % 10]--;
     }
 
     for (i = 0; ++comparisons && i < n; i++) {
-        *a[i] = OutPutArray[i];
+        a[i] = OutPutArray[i];
     }
 }
 
-void RadixSort(int* a[], int n, long long& comparisons) {
+void RadixSort(int a[], int n, long long& comparisons) {
     int mx = GetMax(a, n, comparisons);
     for (int exp = 1; ++comparisons && mx / exp > 0; exp *= 10) {
         CountSort(a, n, exp, comparisons);
     }
 }
 
-void ShakerSort(int* a[], int n, long long& comparisons) {
+void ShakerSort(int a[], int n, long long& comparisons) {
     bool swapped = true;
     int start = 0;
     int end = n - 1;
@@ -211,7 +212,7 @@ void ShakerSort(int* a[], int n, long long& comparisons) {
         // Loop from left to right, same as the bubble sort
         for (int i = start; i < end; ++i) {
             if (++comparisons && a[i] > a[i + 1]) {
-                std::swap(*a[i], *a[i + 1]);
+                std::swap(a[i], a[i + 1]);
                 swapped = true;
             }
         }
@@ -230,7 +231,7 @@ void ShakerSort(int* a[], int n, long long& comparisons) {
         // From right to left, doing the same comparison as in the previous stage
         for (int i = end - 1; i >= start; --i) {
             if (++comparisons && a[i] > a[i + 1]) {
-                std::swap(*a[i], *a[i + 1]);
+                std::swap(a[i], a[i + 1]);
                 swapped = true;
             }
         }
@@ -240,7 +241,7 @@ void ShakerSort(int* a[], int n, long long& comparisons) {
         ++start;
     }
 }
-void ShellSort(int* a[], int n, long long& comparisons) {
+void ShellSort(int a[], int n, long long& comparisons) {
     // Start with a big gap, then reduce the gap
     for (int gap = n / 2; gap > 0; gap /= 2) {
         // Do a gapped insertion sort for this gap size.
@@ -250,26 +251,26 @@ void ShellSort(int* a[], int n, long long& comparisons) {
         for (int i = gap; i < n; i += 1) {
             // Add a[i] to the elements that have been gap sorted
             // Save a[i] in temp and make a hole at position i
-            int temp = *a[i];
+            int temp = a[i];
 
             // Shift earlier gap-sorted elements up until the correct
             // location for a[i] is found
             int j;
-            for (j = i; j >= gap && ++comparisons && *a[j - gap] > temp; j -= gap)
-                *a[j] = *a[j - gap];
+            for (j = i; j >= gap && ++comparisons && a[j - gap] > temp; j -= gap)
+                a[j] = a[j - gap];
 
             // Put temp (the original a[i]) in its correct location
-            *a[j] = temp;
+            a[j] = temp;
         }
     }
 }
 
-void CountingSort(int* a[], int n, long long& comparisons) {
+void CountingSort(int a[], int n, long long& comparisons) {
     // Finding the maximum element of array a[].
     int M = 0;
 
     for (int i = 0; i < n; i++)
-        M = std::max(M, *a[i]);
+        M = std::max(M, a[i]);
 
     // Initializing countArray[] with 0
     int* countArray = new int[M + 1]();
@@ -277,7 +278,7 @@ void CountingSort(int* a[], int n, long long& comparisons) {
     // Mapping each element of array a[] as an index
     // of countArray[] array
     for (int i = 0; i < n; i++)
-        countArray[*a[i]]++;
+        countArray[a[i]]++;
 
     // Calculating prefix sum at every index
     // of array countArray[]
@@ -285,11 +286,11 @@ void CountingSort(int* a[], int n, long long& comparisons) {
         countArray[i] += countArray[i - 1];
 
     // Creating outputArray[] from countArray[] array
-    int** outputArray = new int* [n];
+    int* outputArray = new int [n];
 
     for (int i = n - 1; i >= 0; i--) {
-        outputArray[countArray[*a[i]] - 1] = a[i];
-        countArray[*a[i]]--;
+        outputArray[countArray[a[i]] - 1] = a[i];
+        countArray[a[i]]--;
     }
 
     // Copying the result back to the original array of pointers
